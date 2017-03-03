@@ -1,5 +1,7 @@
 #comments
 
+import math
+
 hexEquivalentsOfBinary = {
     '0000':'0', 
     '0001':'1', 
@@ -37,12 +39,33 @@ binaryEquivalentsOfHex = {
     'F':'1111' }
 
 def main():
-    print(hexEquivalentsOfBinary['0001'])
-    print(binaryEquivalentsOfHex['F'])
-    
     showWelcomeScreen()
 
 def showWelcomeScreen():
+    binary='87012340123'
+
+
+    #fix all this by padding extra 0's
+    #if NOT divisible by 4
+
+    right=len(binary)-1 #-4*2    #end index is 1 less than size (0 based)
+    leftIndex=right-3
+    if(leftIndex<0):
+            leftIndex=0
+    iterations = int(math.ceil(len(binary)/4.0) )
+    for i in range(iterations):
+        
+        #right=len(binary)-1 -4*2    #end index is 1 less than size (0 based)
+        #leftIndex=right-4
+        #if(leftIndex<0):
+        #    leftIndex=0
+        print('left=',leftIndex,'end=',right)
+        print(binary[leftIndex:(right+1)])
+        right -=4
+        leftIndex -=4
+        if(leftIndex<0):
+            leftIndex=0
+    
     while True:
         hexToBinary()
     #userChoice=input('\nHex & Binary Converter \nEnter 1 to convert unsigned binary to hexadecimal \nEnter 2 to convert hexadecimal to unsigned binary \nQuit (any other character) \nYour choice: ')
@@ -60,7 +83,7 @@ def binaryToHex():
     print('\nbin 2 hex')
     binary=input('Enter binary number (max 32 bits): ')
     
-
+    #just try reversed string here
 
     print("1 binary = 2 hex")
     showWelcomeScreen()     #go back to main program
