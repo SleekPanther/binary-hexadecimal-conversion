@@ -36,8 +36,11 @@ binaryEquivalentsOfHex = {
     'D':'1101', 
     'E':'1110', 
     'F':'1111' }
+
 MAX_BITS_ALLOWED = 32       #used to limit user input
 NIBBLE_SIZE = 4             #half a byte. (4 digits long of 1's and 0's)
+
+
 def showWelcomeScreen():
     userChoice=input('\n\tHex & Binary Converter \nEnter 1 to convert unsigned binary to hexadecimal \nEnter 2 to convert hexadecimal to unsigned binary \nQuit (any other character) \nYour choice: ')
     userChoice=userChoice.lstrip(' ')   #remove leading spaces
