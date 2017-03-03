@@ -1,4 +1,4 @@
-#comments
+#
 
 import math
 
@@ -37,37 +37,15 @@ binaryEquivalentsOfHex = {
     'D':'1101', 
     'E':'1110', 
     'F':'1111' }
+MAX_BITS_ALLOWED = 32       #used to limit user input
+NIBBLE_SIZE = 4             #half a byte. (4 digits long of 1's and 0's)
 
 def main():
     showWelcomeScreen()
 
 def showWelcomeScreen():
-    binary='87012340123'
-
-
-    #fix all this by padding extra 0's
-    #if NOT divisible by 4
-
-    right=len(binary)-1 #-4*2    #end index is 1 less than size (0 based)
-    leftIndex=right-3
-    if(leftIndex<0):
-            leftIndex=0
-    iterations = int(math.ceil(len(binary)/4.0) )
-    for i in range(iterations):
-        
-        #right=len(binary)-1 -4*2    #end index is 1 less than size (0 based)
-        #leftIndex=right-4
-        #if(leftIndex<0):
-        #    leftIndex=0
-        print('left=',leftIndex,'end=',right)
-        print(binary[leftIndex:(right+1)])
-        right -=4
-        leftIndex -=4
-        if(leftIndex<0):
-            leftIndex=0
-    
-    while True:
-        hexToBinary()
+    #while True:
+    binaryToHex()
     #userChoice=input('\nHex & Binary Converter \nEnter 1 to convert unsigned binary to hexadecimal \nEnter 2 to convert hexadecimal to unsigned binary \nQuit (any other character) \nYour choice: ')
     #userChoice=userChoice.lstrip(' ')   #remove leading spaces
     #print("|"+userChoice+'|')
@@ -80,13 +58,29 @@ def showWelcomeScreen():
     
 
 def binaryToHex():
-    print('\nbin 2 hex')
-    binary=input('Enter binary number (max 32 bits): ')
-    
-    #just try reversed string here
+    #print('\nbin 2 hex')
+    #binaryValue=input('Enter binary number (max 32 bits): ')
+    hexEquivalent=''
 
-    print("1 binary = 2 hex")
-    showWelcomeScreen()     #go back to main program
+    binaryValue='1010101110001011'
+    binaryValueLength = len(binaryValue)    #string length
+    if binaryValueLength%NIBBLE_SIZE !=0:     #if NOT divisible by 4,  add padding 0's to the left
+        paddingZeros= NIBBLE_SIZE - binaryValueLength%NIBBLE_SIZE    #find if length is divisible by NIBBLE_SIZE of 4 (remainder). Subtract from 4 to find how many MORE digits need to be added to length IS divisible by 4
+        binaryValue = '0'*paddingZeros + binaryValue    #add padding 0's to the left
+        binaryValueLength = len(binaryValue)    #recalculate length since we added to it
+    print(binaryValue)
+
+    rightIndex=binaryValueLength-1      #end index is 1 less than size (0 based)
+    leftIndex=rightIndex -(NIBBLE_SIZE-1)    #NIBBLE_SIZE-1 since we need the 4 consecutive numbers. 0+3=3 but we include 0 and get values 0,1,2,3 (4 values)
+    iterations = int(binaryValueLength/NIBBLE_SIZE)   #loop iterates over 4 character at a time until it runs out of the string
+    for i in range(iterations):
+        nibble = binaryValue[leftIndex:(rightIndex+1)]      #get 4 characters from the string
+        hexEquivalent = hexEquivalentsOfBinary[nibble] +hexEquivalent
+        rightIndex -=NIBBLE_SIZE      #decrement indexes by 4
+        leftIndex -=NIBBLE_SIZE
+
+    print(binaryValue+' binary = '+hexEquivalent+' hex')
+    #showWelcomeScreen()     #go back to main program
 
 def hexToBinary():
     print('\nhex 2 bin')
@@ -103,11 +97,15 @@ def hexToBinary():
     print(hexValue+' hex = '+binaryEquivalent+' binary')
     showWelcomeScreen()     #go back to main program
 
+def isValidBinary(string):
+    for char in string:         #loop through string & return false if it finds any character other than 0 or 1
+        if(ch!='0' and ch!='1'):
+            return false
+    return true
 
 main()
 
 '''
 error checking on length
 uppercase
-left 0 padding
 '''
