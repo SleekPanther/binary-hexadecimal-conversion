@@ -98,7 +98,6 @@ def hexToBinary():
     binaryEquivalent=''
     for char in reversed(hexValue):     #loop skipped for empty strings
         try:
-            print(binaryEquivalentsOfHex[char])
             binaryEquivalent= binaryEquivalentsOfHex[char] +binaryEquivalent
         except KeyError:        #if key is not in my list of valid conversions
             print('Error, you entered an invalid hex value. Try again')
