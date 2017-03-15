@@ -1,15 +1,15 @@
 # Binary Hexadecimal Conversion
 Convert hex to binary and binary to hex by slicing inputs & outputs into 4-bit nibbles
 
-##Notes
+## Notes
 - Choose to which direction to convert
 - Option to enter more conversions unless you quit
 
-##Limitations
+## Limitations
 - 32-bit binary input  
 Not really an issue, since you can simply change `MAX_BITS_ALLOWED` to allow infinite sequences of 0's and 1's
 
-##Code Details
+## Code Details
 - Uses 2 dictionaries of 4-bit nibbles to convert both ways
 - Robust error handling checks:
   - Binay input is <= 32 bits
