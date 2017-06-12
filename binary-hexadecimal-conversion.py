@@ -65,10 +65,8 @@ def binaryToHex():
             print('Error. Too many digits.')
             goodInput=False
             continue    #go back to beginning of loop to try again
-            #binaryValue=input('Error. Too many digits. \nEnter binary number (max 32 bits): ').strip(' ')
-            #binaryValueLength = len(binaryValue)
         if not(isValidBinary(binaryValue)):     #make sure they only entered 1's & 0's
-            print("Error! Only enter 1' & 0's, no spaces or letters")
+            print("Error! Only enter 1's & 0's, no spaces or letters")
             goodInput=False
             continue    #go back to beginning of loop to try again
         if binaryValue == '':   #the conversion loop is skipped since the condition is never true
